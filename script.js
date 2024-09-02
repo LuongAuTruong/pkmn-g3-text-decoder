@@ -154,6 +154,9 @@ function getBoxNames(input) {
                     case '-':
                         boxName[i] = 'ー';
                         break;
+                    case '–':
+                        boxName[i] = 'ー';
+                        break;
                     case '.':
                         boxName[i] = '。';
                         break;
