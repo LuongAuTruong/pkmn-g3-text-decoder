@@ -183,7 +183,7 @@ function getBoxNames(input) {
             }
         }
         catch (err) {
-            alert("Operation aborted, due to: " + err);
+            alert(err);
             return null;
         }
     }
