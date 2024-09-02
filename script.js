@@ -61,7 +61,7 @@ class G3JPEncoding {
             0xf1 : 'Ä', 0xf2 : 'Ö', 0xf3 : 'Ü',
             0xf4 : 'ä', 0xf5 : 'ö', 0xf6 : 'ü',
             0xf7 : '↑', 0xf8 : '↓', 0xf9 : '←',
-            0xfa : '▼', 0xfb : '▾', 0xfc : '^', 0xfd : '\\', 0xfe : '␤',
+            0xfa : '▼', 0xfb : '▾', 0xfc : '^', 0xfd : '␛', 0xfe : '␤',
             0xff : '␃'
         };
         this.reverseCharMap = {};
@@ -133,8 +133,33 @@ function getBoxNames(input) {
         try {
             let boxName = [...inputBoxName]
             for (let i = 0; i < boxName.length; i++) {
-                if (boxName[i] == " ") {
-                    boxName[i] = "　";
+                // Replace common characters on non-Japanese
+                // input devices with Japanese equivalents
+                switch (boxName[i]) {
+                    case " " :
+                        boxName[i] = "　";
+                    case "!":
+                        boxName[i] = "！";
+                    case "?":
+                        boxName[i] = "？";
+                    case "/":
+                        boxName[i] = "／";
+                    case "…":
+                        boxName[i] = "‥";
+                    case "-":
+                        boxName[i] = "ー";
+                    case ".":
+                        boxName[i] = "。";
+                    case "“":
+                        /* Support for straight quotes will never be added as 
+                        trying to guess the context will be too hard */
+                        boxName[i] = "『";
+                    case "”":
+                        boxName[i] = "』";
+                    case "‘":
+                        boxName[i] = "「";
+                    case "’":
+                        boxName[i] = "」";
                 }
             }
             if (!(boxName.length > 8)) {
