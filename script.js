@@ -135,8 +135,8 @@ function getBoxNames(input) {
             for (let i = 0; i < boxName.length; i++) {
                 // Replace common characters on non-Japanese
                 // input devices with Japanese equivalents
-                switch (boxName[i]) {
-                    case ' ' :
+                switch (String(boxName[i])) {
+                    case ' ':
                         boxName[i] = '　';
                     case '!':
                         boxName[i] = '！';
