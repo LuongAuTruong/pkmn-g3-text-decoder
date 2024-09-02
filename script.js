@@ -138,26 +138,36 @@ function getBoxNames(input) {
                 switch (String(boxName[i])) {
                     case ' ':
                         boxName[i] = '　';
+                        break;
                     case '!':
                         boxName[i] = '！';
+                        break;
                     case '?':
                         boxName[i] = '？';
+                        break;
                     case '/':
                         boxName[i] = '／';
+                        break;
                     case '…':
                         boxName[i] = '‥';
+                        break;
                     case '-':
                         boxName[i] = 'ー';
+                        break;
                     case '.':
                         boxName[i] = '。';
+                        break;
                     case '“':
                         /* Support for straight quotes will never be added as 
                         trying to guess the context will be too hard */
                         boxName[i] = '『';
+                        break;
                     case '”':
                         boxName[i] = '』';
+                        break;
                     case '‘':
                         boxName[i] = '「';
+                        break;
                     case '’':
                         boxName[i] = '」';
                 }
