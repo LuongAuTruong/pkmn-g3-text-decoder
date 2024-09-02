@@ -76,7 +76,7 @@ class G3JPEncoding {
             if (char in this.reverseCharMap){
                 output.push(this.reverseCharMap[char]);
             } else {
-                throw Error(char + ' is not a valid character');
+                throw Error(char + " is not a valid character");
             }
         }
         return Uint8Array.from(output)
@@ -88,7 +88,7 @@ class G3JPEncoding {
             if (char in this.charMap){
                 output.push(this.charMap[char])
             } else {
-                throw Error(char + ' is not a valid character');
+                throw Error(char + " is not a valid character");
             }
         }
         return output.join('');
@@ -136,30 +136,30 @@ function getBoxNames(input) {
                 // Replace common characters on non-Japanese
                 // input devices with Japanese equivalents
                 switch (boxName[i]) {
-                    case " " :
-                        boxName[i] = "　";
-                    case "!":
-                        boxName[i] = "！";
-                    case "?":
-                        boxName[i] = "？";
-                    case "/":
-                        boxName[i] = "／";
-                    case "…":
-                        boxName[i] = "‥";
-                    case "-":
-                        boxName[i] = "ー";
-                    case ".":
-                        boxName[i] = "。";
-                    case "“":
+                    case ' ' :
+                        boxName[i] = '　';
+                    case '!':
+                        boxName[i] = '！';
+                    case '?':
+                        boxName[i] = '？';
+                    case '/':
+                        boxName[i] = '／';
+                    case '…':
+                        boxName[i] = '‥';
+                    case '-':
+                        boxName[i] = 'ー';
+                    case '.':
+                        boxName[i] = '。';
+                    case '“':
                         /* Support for straight quotes will never be added as 
                         trying to guess the context will be too hard */
-                        boxName[i] = "『";
-                    case "”":
-                        boxName[i] = "』";
-                    case "‘":
-                        boxName[i] = "「";
-                    case "’":
-                        boxName[i] = "」";
+                        boxName[i] = '『';
+                    case '”':
+                        boxName[i] = '』';
+                    case '‘':
+                        boxName[i] = '「';
+                    case '’':
+                        boxName[i] = '」';
                 }
             }
             if (!(boxName.length > 8)) {
@@ -202,7 +202,7 @@ function prepareDisplayNames(rawBoxNames, int16BoxNames, int32BoxNames) {
     }
     let int32Display = int32StringNames.join('\n');
     for (i of int32BoxNames) {
-        codeGeneratorStringNames.push("0x" + i.toString(16))
+        codeGeneratorStringNames.push('0x' + i.toString(16))
     }
     let codeGeneratorDisplay = codeGeneratorStringNames.join('\n');
     let displayOutput = `\
@@ -225,9 +225,8 @@ ${codeGeneratorDisplay}`;
 }
 
 function convertCharToHex() {
-    let input = document.getElementById("input").value
-    let outputTextBox = document.getElementById("output")
-    outputTextBox.value = input
+    let input = document.getElementById('input').value
+    let outputTextBox = document.getElementById('output')
     let boxNames = getBoxNames(input)
     if (boxNames == null) {
         return null // Exit if format is wrong
@@ -235,8 +234,7 @@ function convertCharToHex() {
     let boxNameStream = getBoxNameAsStream(boxNames)
     let boxNamesInt16 = convertToInt16(boxNameStream)
     let boxNamesInt32 = convertToInt32(boxNameStream)
-    let displayOutput = prepareDisplayNames(boxNames, boxNamesInt16, boxNamesInt32)
-    outputTextBox.value = displayOutput;
+    outputTextBox.value = prepareDisplayNames(boxNames, boxNamesInt16, boxNamesInt32)
 }
 
-document.getElementById("convertButton").onclick = convertCharToHex;
+document.getElementById('convertButton').onclick = convertCharToHex;
